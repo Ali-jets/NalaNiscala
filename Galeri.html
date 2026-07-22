@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galeri Memori - KKN 04 Nala Niscala</title>
+    <link rel="stylesheet" href="Draft.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;1,600&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <nav>
+        <div class="logo">
+            <img src="./Logo_kkn-removebg-preview.png" alt="Logo KKN" class="logo-img">
+           <span>KKN 04 Nala Niscala</span>
+       </div>
+       <ul class="nav-links">
+        <li><a href="index.html">Beranda</a></li>
+        <li><a href="proker.html">Program Kerja</a></li>
+    </ul>
+    </nav>
+
+    <section class="container" style="margin-top: 100px;">
+        <div class="section-title">
+            <h2>Kepingan Memori</h2>
+            <p>Kumpulan potret kebersamaan, dengan tawa paling jujur, peluh paling tulus, dan rasa yang murni untuk kerinduan nanti.</p>
+        </div>
+        
+        <!-- Wadah galeri otomatis -->
+        <div id="galeri-list" class="grid-galeri"></div>
+    </section>
+
+    <div class="music-player-box">
+        <span id="track-title" class="music-info">Memuat Musik...</span>
+        <div class="music-controls">
+            <button id="play-pause-btn" title="Play/Pause">▶</button>
+            <button id="next-btn" title="Lagu Selanjutnya">⏭</button>
+        </div>
+    </div>
+    <audio id="bg-audio"></audio>
+
+    <div id="modal-galeri" class="memory-modal-overlay">
+        <div class="memory-modal-card">
+            <h3>Saksi Bisu Waktu</h3>
+            <p>"Setiap jepretan di galeri ini adalah saksi bisu. Ketika rindu datang di kemudian hari, cukup buka halaman ini dan biarkan mata bernostalgia pada masa-masa terindah kita."</p>
+            <span class="memory-modal-hint">Klik di luar kotak untuk melanjutkan</span>
+        </div>
+    </div>
+
+    <!-- MODAL LIGHTBOX UNTUK ZOOM FOTO FULL -->
+    <div id="imageModal" class="modal-lightbox">
+        <span class="close-lightbox">&times;</span>
+        <img class="modal-content" id="imgModalContent" alt="Zoom Image">
+    </div>
+
+    <footer>
+        <p>&copy; 2026 KKN 04 Nala Niscala - Desa Ciasmara.</p>
+    </footer>
+
+    <script src="Draft.js"></script>
+</body>
+</html>

@@ -1,0 +1,786 @@
+/* RESET & FONTS */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { 
+    font-family: 'Poppins', Times New Roman; 
+    background-color: hsl(32, 44%, 92%); 
+    color: #020202;
+    scroll-behavior: smooth;
+}
+h1, h2, h3, .logo { font-family: 'Playfair Display', serif; }
+
+/* NAVIGASI */
+nav {
+    position: fixed; width: 100%; top: 0; left: 0;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 15px 50px; background: rgb(8, 41, 90);
+    backdrop-filter: blur(10px); z-index: 1000;
+}
+.logo { font-size: 24px; font-weight: 600; color: #f3eae0; }
+.nav-links { list-style: none; display: flex; gap: 20px; }
+.nav-links a { text-decoration: none; color: #f3eae0; font-weight: 500; transition: 0.3s; }
+.nav-links a:hover { color: #f7f8f4; }
+
+/* HERO BANNER */
+#hero {
+    height: 100vh;
+    background: url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&q=80&w=1920') center/cover no-repeat;
+    position: relative; display: flex; align-items: center; justify-content: center;
+    text-align: center; color: rgb(255, 255, 255);
+}
+.hero-overlay {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(44, 53, 37, 0.6);
+}
+.hero-content { position: relative; z-index: 1; max-width: 800px; padding: 20px; }
+.hero-content h1 { font-size: 60px; font-style: italic; margin-bottom: 10px; }
+.hero-content p { font-size: 18px; margin-bottom: 30px; letter-spacing: 1px; }
+
+/* TOMBOL */
+.btn-primary {
+    display: inline-block; padding: 12px 30px;
+    background: #ffffff; color: rgb(0, 0, 0); text-decoration: none;
+    border-radius: 30px; font-weight: 500; letter-spacing: 1px;
+    transition: 0.3s ease;
+}
+.btn-primary:hover { background: #2f486d; transform: translateY(-3px); }
+
+/* LAYOUT CONTAINER */
+.container { max-width: 1200px; margin: 0 auto; padding: 80px 20px; }
+.section-title { text-align: center; margin-bottom: 50px; }
+.section-title h2 { font-size: 40px; color: #000000; margin-bottom: 10px; }
+.bg-light { background-color: #d2c7b8; }
+
+/* WADAH GALERI */
+/* ========================================== */
+/* GAYA GALERI KOTAK RAPI & HOVER ELEGAN      */
+/* ========================================== */
+.grid-galeri {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 15px;
+}
+
+.galeri-item {
+    position: relative; 
+    overflow: hidden; 
+    border-radius: 10px; 
+    aspect-ratio: 1/1; /* Bikin kotak persegi simetris */
+    cursor: pointer;
+    background: #111;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+/* Gambar dan video otomatis menutup penuh kotak (full cover) */
+.galeri-item img, 
+.galeri-item video { 
+    width: 100%; 
+    height: 100%; 
+    object-fit: cover; 
+    transition: 0.5s ease; 
+}
+
+/* Efek zoom & redup saat kursor diarahkan */
+.galeri-item:hover img, 
+.galeri-item:hover video { 
+    transform: scale(1.1); 
+    filter: brightness(70%); 
+}
+
+/* Teks overlay tersembunyi di bawah, lalu naik pas di-hover */
+.overlay-teks {
+    position: absolute; 
+    bottom: -50px; 
+    left: 0; 
+    width: 100%;
+    text-align: center; 
+    color: white; 
+    background: rgba(0, 0, 0, 0.6);
+    padding: 10px 0; 
+    transition: 0.4s ease; 
+    font-size: 14px;
+    z-index: 2;
+}
+
+.galeri-item:hover .overlay-teks { 
+    bottom: 0; 
+}
+
+
+/* ========================================== */
+/* STYLING LIGHTBOX & ZOOM GAMBAR PROKER     */
+/* ========================================== */
+.proker-card img {
+    cursor: pointer;
+    transition: opacity 0.3s;
+}
+.proker-card img:hover {
+    opacity: 0.9;
+}
+.modal-lightbox {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    padding-top: 50px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.9);
+}
+.modal-content {
+    margin: auto;
+    display: block;
+    max-width: 85%;
+    max-height: 80vh;
+    object-fit: contain;
+    border-radius: 8px;
+    transition: transform 0.3s ease;
+    cursor: zoom-in;
+}
+.modal-content.zoomed {
+    transform: scale(1.6);
+    cursor: zoom-out;
+}
+.close-lightbox {
+    position: absolute;
+    top: 25px;
+    right: 40px;
+    color: #f3eae0;
+    font-size: 45px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.close-lightbox:hover {
+    color: #f3eae0;
+}
+/* GRID TIM (Anti-Melar) */
+.grid-tim {
+    display: grid; 
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px; 
+    align-items: start; 
+}
+.kader {
+    padding: 20px; background: rgb(255, 255, 255); border: 1px solid #eaeaea;
+    border-radius: 8px; transition: 0.3s; cursor: pointer;
+    display: flex; flex-direction: column; align-items: center; text-align: center;
+}
+.kader:hover { border-color: #f3eae0; background: #f3eae0; }
+.kader .nama { font-weight: 600; color: #000000; margin-bottom: 5px; }
+.kader .jabatan { font-size: 13px; color: #bd8d27; text-transform: uppercase; letter-spacing: 1px;}
+
+/* FOTO TIM (Efek Accordion & Auto Crop) */
+.foto-anggota {
+    display: block;
+    width: 100%;
+    height: 0;
+    object-fit: cover;
+    object-position: top; 
+    border-radius: 8px;
+    margin-top: 0;
+    opacity: 0;
+    transition: all 0.4s ease-in-out;
+}
+.kader.aktif .foto-anggota {
+    height: 200px; 
+    margin-top: 15px;
+    opacity: 1; 
+}
+
+/* ========================================== */
+/* DESAIN BARU: PROFIL DESA (Lebih Estetik & Elegan) */
+/* ========================================== */
+.profil-card {
+    background: linear-gradient(135deg, #ffffff 0%, #f9f8f4 100%);
+    padding: 45px 50px;
+    border-radius: 20px; /* Sudut lebih melengkung modern */
+    box-shadow: 0 20px 40px rgba(90, 102, 80, 0.06);
+    border: 1px solid rgba(90, 102, 80, 0.1);
+    max-width: 900px;
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Garis aksen gradasi di sebelah kiri */
+.profil-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; width: 6px; height: 100%;
+    background: linear-gradient(to bottom, #2f486d, #d2c7b8);
+}
+
+.profil-card p {
+    font-size: 16px;
+    line-height: 1.9;
+    color: #000000;
+    text-align: justify;
+}
+
+
+/* ========================================== */
+/* DESAIN BARU: KESAN & PESAN (Gaya Testimoni Keren) */
+/* ========================================== */
+.grid-kesan {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+}
+
+.kesan-card {
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 16px; /* Bikin sudutnya tidak kaku */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+    border: 1px solid #d2c7b8;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+/* Efek melayang (floating) saat kursor mendekat */
+.kesan-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(90, 102, 80, 0.12);
+    border-color:#d2c7b8;
+}
+
+/* Tanda kutip artistik di pojok kanan atas kartu */
+.kesan-card::after {
+    content: '“';
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 65px;
+    font-family: 'Playfair Display', serif;
+    color: rgba(0, 0, 0, 1);
+    line-height: 1;
+    pointer-events: none;
+}
+
+.kesan-card h4 {
+    color: #000000;
+    margin-bottom: 10px;
+    font-size: 17px;
+    font-family: 'Playfair Display', serif;
+    font-weight: 600;
+}
+
+.kesan-card p {
+    font-size: 14px;
+    color: #000000;
+    font-style: italic;
+    line-height: 1.7;
+}
+
+/* PENGATURAN LOGO DI NAVBAR */
+.logo { 
+    display: flex; 
+    align-items: center; 
+    gap: 10px; /* Jarak antara gambar logo dan teks */
+    font-size: 24px; 
+    font-weight: 600; 
+    color: #ffffff; 
+}
+
+.logo-img { 
+    width: 38px; /* Ukuran lebar logo */
+    height: 38px; /* Ukuran tinggi logo */
+    object-fit: contain; /* Biar logo nggak gepeng */
+}
+
+/* ========================================== */
+/* PERBAIKAN GRID & KOTAK PROKER (CARD)       */
+/* ========================================== */
+.grid-proker {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+    margin-top: 20px;
+}
+
+.proker-card {
+    background: #ffffff;
+    border: 1px solid #ffffff; /* Garis border tegas biar kotaknya keliatan jelas */
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.proker-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(90, 102, 80, 0.12);
+}
+
+.proker-card img {
+    width: 100%;
+    height: 190px;
+    object-fit: cover;
+    border-bottom: 1px solid #eee;
+}
+
+.proker-konten {
+    padding: 20px;
+}
+
+.proker-konten h3 {
+    font-size: 18px;
+    color: #000000;
+    margin-bottom: 8px;
+    font-family: 'Playfair Display', serif;
+}
+
+.proker-konten p {
+    font-size: 14px;
+    color: #000000;
+    line-height: 1.6;
+}
+
+/* ========================================== */
+/* STYLING GRID & GAMBAR GALERI (TIDAK KEPOTONG) */
+/* ========================================== */
+.grid-galeri {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.galeri-item {
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.04);
+    border: 1px solid #eee;
+}
+
+/* Gambar dan video di galeri agar tidak kepotong (full view) */
+.galeri-item img, 
+.galeri-item video {
+    width: 100%;
+    height: 200px;
+    object-fit: contain; /* Mengubah dari cover ke contain agar seluruh gambar tampil utuh tanpa terpotong */
+    background-color: #f9f8f4; /* Memberikan background estetik jika rasio foto tidak kotak */
+    cursor: pointer;
+    transition: opacity 0.3s;
+}
+
+.galeri-item img:hover {
+    opacity: 0.9;
+}
+
+.overlay-teks {
+    padding: 12px;
+    font-size: 13px;
+    text-align: center;
+    color: #000000;
+    font-weight: 500;
+    background: #ffffff;
+    border-top: 1px solid #f0f0f0;
+}
+
+/* ========================================== */
+/* GRID GALERI FULL COVER & KOTAK SERAGAM     */
+/* ========================================== */
+.grid-galeri {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 15px;
+}
+
+.galeri-item {
+    position: relative; 
+    overflow: hidden; 
+    border-radius: 10px; 
+    aspect-ratio: 1/1; /* Kotak persegi seragam */
+    cursor: pointer;
+    background: #000;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+/* Gambar & video nge-fill penuh kotak tanpa blank putih */
+.galeri-item img, 
+.galeri-item video { 
+    width: 100%; 
+    height: 100%; 
+    object-fit: cover; 
+    transition: transform 0.4s ease; 
+}
+
+.galeri-item:hover img { 
+    transform: scale(1.08); /* Efek zoom tipis pas kursor di atasnya */
+}
+
+/* Teks keterangan di bawah kotak */
+.overlay-teks {
+    position: absolute; 
+    bottom: 0; 
+    left: 0; 
+    width: 100%;
+    text-align: center; 
+    color: white; 
+    background: rgba(0, 0, 0, 0.6);
+    padding: 8px 0; 
+    font-size: 13px;
+    z-index: 2;
+}
+
+/* ========================================== */
+/* MODAL LIGHTBOX & ZOOM IN/OUT (POP-UP)     */
+/* ========================================== */
+.modal-lightbox {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    padding-top: 50px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.92);
+}
+
+.modal-content {
+    margin: auto;
+    display: block;
+    max-width: 85%;
+    max-height: 80vh;
+    object-fit: contain;
+    border-radius: 8px;
+    transition: transform 0.3s ease;
+    cursor: zoom-in;
+}
+
+.modal-content.zoomed {
+    transform: scale(1.7); /* Memperbesar gambar saat diklik di dalam modal */
+    cursor: zoom-out;
+}
+
+.close-lightbox {
+    position: absolute;
+    top: 25px;
+    right: 40px;
+    color: #f1f1f1;
+    font-size: 45px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.close-lightbox:hover {
+    color: #c38d4e;
+}
+
+/* ========================================== */
+/* GRID GALERI: FULL COVER, ZOOM, & SLIDE OVERLAY */
+/* ========================================== */
+.grid-galeri {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 15px;
+}
+
+.galeri-item {
+    position: relative; 
+    overflow: hidden; 
+    border-radius: 10px; 
+    aspect-ratio: 1/1; /* Kotak persegi simetris sempurna */
+    cursor: pointer;
+    background: #000;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+/* Gambar & video otomatis nge-fill penuh kotak (full cover tanpa celah putih) */
+.galeri-item img, 
+.galeri-item video { 
+    width: 100%; 
+    height: 100%; 
+    object-fit: cover; 
+    transition: 0.5s ease; 
+}
+
+/* Efek zoom tipis & agak gelap pas kursor mendekat */
+.galeri-item:hover img, 
+.galeri-item:hover video { 
+    transform: scale(1.1); 
+    filter: brightness(70%); 
+}
+
+/* Teks keterangan disembunyikan di bawah layar kotak (-50px) */
+.overlay-teks {
+    position: absolute; 
+    bottom: -50px; 
+    left: 0; 
+    width: 100%;
+    text-align: center; 
+    color: white; 
+    background: rgba(0, 0, 0, 0.65);
+    padding: 10px 0; 
+    transition: 0.4s ease; 
+    font-size: 14px;
+    z-index: 2;
+}
+
+/* Teks naik ke atas (bottom: 0) pas kursor diarahkan ke galeri-item */
+.galeri-item:hover .overlay-teks { 
+    bottom: 0; 
+}
+
+
+/* ========================================== */
+/* MASTER STYLING - KKN 04 NALA NISCALA       */
+/* ========================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    padding-top: 80px;
+    background-color: #d2c7b8;
+    color: #000000;
+    line-height: 1.6;
+}
+
+/* Navigasi */
+nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(5px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 8%;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    z-index: 1000;
+}
+
+nav .logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 600;
+    color: #000000;
+}
+
+nav .nav-links {
+    list-style: none;
+    display: flex;
+    gap: 25px;
+}
+
+nav .nav-links a {
+    text-decoration: none;
+    color: #000000;
+    font-size: 14px;
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+nav .nav-links a:hover {
+    color: #000000;
+}
+
+/* Container */
+.container {
+    max-width: 1100px;
+    margin: 130px auto 60px auto;
+    padding: 0 20px;
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.section-title h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px;
+    color: #000000;
+    margin-bottom: 10px;
+}
+
+.section-title p {
+    font-size: 14px;
+    color: #000000;
+}
+
+/* ========================================== */
+/* FLOATING MULTI-SONG MUSIC PLAYER           */
+/* ========================================== */
+.music-player-box {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    z-index: 9999;
+    background: #f3eae0;
+    border: 1px solid #dcd6cd;
+    padding: 12px 18px;
+    border-radius: 30px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+}
+
+.music-info {
+    font-size: 12px;
+    color: #223148;
+    max-width: 150px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-weight: 500;
+}
+
+.music-controls button {
+    background: #223148;
+    color: white;
+    border: none;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 12px;
+    transition: 0.3s;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.music-controls button:hover {
+    background: #223148;
+    transform: scale(1.05);
+}
+
+/* ========================================== */
+/* MODAL POPUP (EMOSIONAL & TANPA TOMBOL)     */
+/* ========================================== */
+.memory-modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(35, 35, 30, 0.55);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    z-index: 10000;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    cursor: pointer; /* Klik di luar untuk menutup */
+}
+
+.memory-modal-card {
+    background: #fffdf9;
+    padding: 45px 35px;
+    border-radius: 20px;
+    max-width: 480px;
+    width: 100%;
+    text-align: center;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+    border: 1px solid #dcd6cd;
+    position: relative;
+    cursor: default; /* Mencegah modal tertutup saat mengklik area dalam kartu */
+    animation: softPopup 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.memory-modal-card::before {
+    content: "✦  Kepingan Memori  ✦";
+    display: block;
+    font-size: 11px;
+    color: #000000;
+    letter-spacing: 4px;
+    margin-bottom: 15px;
+    font-family: 'Playfair Display', serif;
+}
+
+.memory-modal-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 24px;
+    color: #4a5342;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.memory-modal-card p {
+    font-size: 14px;
+    color: #605c54;
+    line-height: 1.8;
+    font-style: italic;
+}
+
+.memory-modal-hint {
+    display: block;
+    margin-top: 25px;
+    font-size: 11px;
+    color: #999;
+    letter-spacing: 1px;
+}
+
+@keyframes softPopup {
+    from {
+        opacity: 0;
+        transform: scale(0.95) translateY(15px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+/* Konten Tambahan Halaman */
+.content-box {
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+    margin-bottom: 25px;
+    border: 1px solid #eee;
+}
+
+.content-box h3 {
+    font-family: 'Playfair Display', serif;
+    color: #5a6650;
+    margin-bottom: 10px;
+}
+
+footer {
+    text-align: center;
+    padding: 30px;
+    font-size: 13px;
+    color: #777;
+    border-top: 1px solid #e5e0d8;
+    margin-top: 60px;
+}
+
+/* Jarak antar bagian di Single Page */
+.page-section {
+    min-height: 90vh; /* Setiap bagian punya ruang tinggi layar */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 60px 20px;
+    border-bottom: 1px solid #eee;
+}
+
+/* HANYA WARNAI BAGIAN NAVIGASINYA SAJA (JANGAN HEADER/HERO) */
+nav, .navbar {
+    background: rgb(47, 72, 109) !important;
+}
+
+/* WARNA TEKS MENU DAN LOGO JADI PUTIH */
+nav a, .navbar a, .logo {
+    color: #ffffff !important;
+}
+
+footer { text-align: center; padding: 30px; background: #2f486d; color: white; font-size: 14px; }
